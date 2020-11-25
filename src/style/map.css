@@ -1,0 +1,89 @@
+.mapContainer {
+  /* margin-top: 1; */
+  left: 0;
+  top: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+.fireIcon {
+  color: red;
+}
+
+.fireIcon,
+.stormIcon {
+  font-size: 2rem;
+  cursor: pointer;
+  /* right: 4rem; */
+}
+
+.filterContainer {
+  width: 75px;
+  cursor: pointer;
+  position: fixed;
+  left: 1.4rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  background: dodgerblue;
+  border-radius: 60px;
+  align-items: center;
+  color: white;
+  text-shadow: 0 0 0.3rem black;
+  filter: drop-shadow(0 0 0.1rem black);
+}
+
+.filterContainer span {
+  color: white;
+  text-shadow: 0 0 0.3rem black;
+  display: none;
+}
+
+.filterContainer:hover {
+  transition: all 0.8s ease-in-out;
+}
+
+@media (min-width: 880px) {
+  .filterContainer {
+    top: 5.4rem;
+  }
+  .filterContainer:hover {
+    width: 8%;
+  }
+}
+
+@media (max-width: 880px) {
+  .filterContainer {
+    top: 7.4rem;
+  }
+  .filterContainer:hover {
+    width: 40%;
+  }
+}
+
+.filterContainer:hover > span {
+  transition: all 0.8s ease-in-out;
+  justify-content: center;
+  display: flex;
+}
+
+.filterContainer:hover > .filterIcon {
+  /* width: auto; */
+}
+
+.filterIcon {
+  padding: 1rem;
+  font-size: 2rem;
+  /* width: 100%; */
+  filter: drop-shadow(0 0 0.2rem black);
+}
+
+.filterByIcon {
+  width: 75px;
+  cursor: pointer;
+  position: fixed;
+  top: 15.4rem;
+  left: 1.4rem;
+  z-index: 3;
+}

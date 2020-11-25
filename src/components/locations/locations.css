@@ -1,0 +1,38 @@
+.locationInfo {
+  position: absolute;
+  top: 80px;
+  right: 50px;
+  width: 400px;
+  min-height: 200px;
+  padding: 0.3rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  font-size: 18px;
+  color: #fff;
+  box-shadow: 0 0 0.3rem black;
+}
+
+.locationInfo h2 {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* .locationInfo a {
+  text-decoration: none;
+  color: red;
+  text-shadow: 0 0 0.4rem black;
+} */
+
+.locationPointer {
+  background: black;
+  border-radius: 50px;
+  padding: 0.3rem;
+  width: auto;
+  position: fixed;
+  outline: none;
+}
+
+.locationPointer .fireIcon:focus,
+.locationPointer .fireIcon:focus-visible {
+  outline: none;
+}
