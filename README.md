@@ -18,7 +18,10 @@ Made with NASA API and Google Map API.
 
 ## Main page
 
-![Alt text](/Examples/ss1.jpg "Main Page")
+_Desktop View_
+![Alt text](/Examples/ss1desktop.jpg "Desktop Page")
+_Mobile View_
+![Alt text](/Examples/ss1mobile.jpg "Mobile Page")
 
 - View Wildfire events around the world.
 - Offline Support.
