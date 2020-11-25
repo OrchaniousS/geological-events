@@ -1,35 +1,75 @@
 .locationInfo {
   position: absolute;
-  top: 80px;
-  right: 50px;
-  width: 400px;
-  min-height: 200px;
-  padding: 0.3rem;
   background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-  font-size: 18px;
+  border-radius: 12px;
   color: #fff;
+  text-shadow: 0 0 0.3rem black;
   box-shadow: 0 0 0.3rem black;
-}
-
-.locationInfo h2 {
-  font-size: 1.4rem;
+  transition: all 1s ease-in;
+  align-items: center;
   text-align: center;
 }
 
-/* .locationInfo a {
-  text-decoration: none;
-  color: red;
-  text-shadow: 0 0 0.4rem black;
-} */
+@media (min-width: 880px) {
+  .locationInfo {
+    top: 5rem;
+    right: 1rem;
+    width: 18rem;
+    min-width: 13rem;
+    min-height: fit-content;
+    padding: 0.3rem;
+  }
+}
+
+@media (max-width: 880px) {
+  .locationInfo {
+    right: 0;
+    left: 0;
+    bottom: 4rem;
+    padding: 0.3rem;
+    margin: 0.4rem;
+    min-height: 8rem;
+  }
+}
+
+.locationInfo h2 {
+  text-align: center;
+  font-size: 1.4rem;
+  padding: 0.2rem;
+  margin: 0.1rem;
+  border-bottom: 1px solid white;
+}
+
+.locationInfoBottom {
+  padding: 0.8rem;
+  margin: 0.3rem;
+}
+
+.locationDiv {
+  font-size: 1rem;
+}
+
+.eventLocationDiv {
+  font-size: 1.5rem;
+}
 
 .locationPointer {
-  background: black;
-  border-radius: 50px;
-  padding: 0.3rem;
+  background: rgb(0, 0, 0);
+  filter: drop-shadow(0 0 0.2rem black);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  padding: 0.35rem;
   width: auto;
   position: fixed;
   outline: none;
+}
+
+.locationPointer > :hover {
+  left: -50%;
+  transform: translateY(-50%);
+  font-size: 3.4rem;
+  padding: 0.5rem;
 }
 
 .locationPointer .fireIcon:focus,

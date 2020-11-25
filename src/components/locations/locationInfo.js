@@ -6,22 +6,12 @@ const LocationInfo = ({ locationInfo: { id, title, link } }) => {
   return (
     <div className="locationInfo">
       <h2>Event Info</h2>
-      <div>
-        <ul key={link}>
-          <div>
-            <p>
-              {title.split("-")[0]} [ID:{id}]
-            </p>
-            <p>
-              Location:
-              {title.replace("Wildfire -", "")}
-            </p>
-          </div>
-          {/* <p>
-            Source:
-            <a href={link}>Link</a>
-          </p> */}
-        </ul>
+      <div className="locationInfoBottom">
+        <div className="eventLocationDiv">{title.split("-")[0]}</div>
+        <div className="locationDiv">
+          Location:
+          {title.replace("Wildfire -", "")}
+        </div>
       </div>
     </div>
   )

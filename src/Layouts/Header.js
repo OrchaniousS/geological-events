@@ -7,24 +7,34 @@ import "../style/header.css"
 const Header = () => {
   const [headerStatus, setHeaderStatus] = useState(true)
 
-  return headerStatus ? (
+  return (
     <header>
-      <h1>Geological Events by NASA</h1>
-      <Icon
-        onClick={() => setHeaderStatus(headerStatus => !headerStatus)}
-        className="closeIcon"
-        icon={arrowUpBoldBoxOutline}
-      />
+      {headerStatus ? (
+        <>
+          <div>
+            <h1>Geological Events by NASA</h1>
+          </div>
+          <div>
+            <Icon
+              onClick={() => setHeaderStatus(headerStatus => !headerStatus)}
+              className="closeIcon"
+              icon={arrowUpBoldBoxOutline}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="headerMinimized">
+            <Icon
+              onClick={() => setHeaderStatus(headerStatus => !headerStatus)}
+              className="closeIconActive"
+              icon={arrowUpBoldBoxOutline}
+              rotate="180deg"
+            />
+          </div>
+        </>
+      )}
     </header>
-  ) : (
-    <div className="headerMinimized">
-      <Icon
-        onClick={() => setHeaderStatus(headerStatus => !headerStatus)}
-        className="closeIconActive"
-        icon={arrowUpBoldBoxOutline}
-        rotate="180deg"
-      />
-    </div>
   )
 }
 

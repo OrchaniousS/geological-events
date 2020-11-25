@@ -1,35 +1,59 @@
 .mapContainer {
-  /* margin-top: 1; */
   left: 0;
   top: 0;
+  bottom: 0;
+  right: 0;
   position: fixed;
   height: 100%;
   width: 100%;
   justify-content: center;
 }
-.fireIcon {
-  color: red;
+
+.droughtIcon {
+  color: rgba(99, 56, 16, 0.384);
 }
 
-.fireIcon,
+.fireIcon {
+  color: #e74c3c;
+}
+
 .stormIcon {
-  font-size: 2rem;
+  color: #ecf0f1;
+}
+
+.volcanoIcon {
+  color: rgb(255, 0, 0);
+  text-shadow: 0 0 0.3rem dodgerblue;
+}
+
+.icebergIcon,
+.floodIcon {
+  color: dodgerblue;
+}
+
+.droughtIcon,
+.fireIcon,
+.floodIcon,
+.stormIcon,
+.volcanoIcon,
+.icebergIcon {
+  font-size: 1.4rem;
   cursor: pointer;
-  /* right: 4rem; */
+  transition: all 0.2s ease-in;
 }
 
 .filterContainer {
-  width: 75px;
   cursor: pointer;
   position: fixed;
   left: 1.4rem;
   z-index: 3;
   display: flex;
   flex-direction: row;
+  width: 75px;
+  color: white;
   background: dodgerblue;
   border-radius: 60px;
   align-items: center;
-  color: white;
   text-shadow: 0 0 0.3rem black;
   filter: drop-shadow(0 0 0.1rem black);
 }
@@ -68,14 +92,9 @@
   display: flex;
 }
 
-.filterContainer:hover > .filterIcon {
-  /* width: auto; */
-}
-
 .filterIcon {
   padding: 1rem;
   font-size: 2rem;
-  /* width: 100%; */
   filter: drop-shadow(0 0 0.2rem black);
 }
 
@@ -86,4 +105,9 @@
   top: 15.4rem;
   left: 1.4rem;
   z-index: 3;
+}
+
+.filterByIcon div {
+  display: flex;
+  background: wheat;
 }

@@ -8,73 +8,18 @@ header {
   background: #ee9ca7;
   background: -webkit-linear-gradient(to right, #d1b0b0, #e06e9e);
   background: linear-gradient(to right, #d1b0b0, #e06e9e);
-  display: flex;
-  text-align: center;
-  justify-content: center;
   box-shadow: 0 0 0.4rem black;
-}
-
-header h1 {
+  text-align: center;
   color: white;
-  font-size: 1.5rem;
   text-shadow: 0 0 0.3rem black;
-}
-
-.closeIcon {
-  cursor: pointer;
-  position: fixed;
-  top: 0;
-  color: white;
-  font-size: 2.5rem;
-  text-shadow: 0 0 0.3rem black;
-  transition: all 1s ease-out;
 }
 
 .closeIcon,
 .closeIconActive {
   transition: all 1s ease-out;
-}
-
-@media (min-width: 880px) {
-  .closeIcon,
-  .closeIconActive {
-    padding: 0.8rem;
-    right: 4rem;
-  }
-}
-
-@media (max-width: 880px) {
-  .closeIcon,
-  .closeIconActive {
-    right: 2.8rem;
-    padding: 0.8rem;
-  }
-}
-
-@media (max-width: 450px) {
-  header {
-    height: 6rem;
-  }
-
-  .closeIcon {
-    top: 2rem;
-    right: 7.5rem;
-    padding: 1.2rem;
-  }
-
-  .closeIconActive {
-    right: 7.5rem;
-    padding: 1.2rem;
-  }
-}
-
-@media (min-width: 451) and (max-width: 880px) {
-  .closeIcon {
-    right: 2.8rem;
-  }
-  .closeIconActive {
-    right: 2.8rem;
-  }
+  cursor: pointer;
+  color: white;
+  font-size: 2rem;
 }
 
 .closeIcon:hover,
@@ -82,13 +27,14 @@ header h1 {
   font-size: 2.8rem;
 }
 
+.closeIcon {
+  text-shadow: 0 0 0.3rem black;
+  transition: all 1s ease-out;
+}
+
 .closeIconActive {
-  cursor: pointer;
   position: fixed;
   top: 0;
-  color: white;
-  font-size: 2.5rem;
-  text-shadow: 0 0 0.3rem black;
   background: #ee9ca7;
   background: -webkit-linear-gradient(to right, #d1b0b0, #e06e9e);
   background: linear-gradient(to right, #d1b0b0, #e06e9e);
@@ -99,10 +45,66 @@ header h1 {
 }
 
 .headerMinimized {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
+  right: 0;
   z-index: 99;
   transition: all 0.4s ease-in;
-  height: 2rem;
+  /* height: 2rem; */
+}
+
+@media (min-width: 880px) {
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .closeIcon,
+  .closeIconActive {
+    padding: 0.8rem;
+  }
+
+  .closeIconActive {
+    left: 48%;
+  }
+}
+
+@media (min-width: 451) and (max-width: 880px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .closeIcon,
+  .closeIconActive {
+    right: 2.8rem;
+    padding: 0.8rem;
+  }
+  .closeIcon {
+    right: 2.8rem;
+  }
+  .closeIconActive {
+    right: 2.8rem;
+  }
+}
+
+@media (max-width: 450px) {
+  header h1 {
+    font-size: 1rem;
+  }
+
+  .closeIcon {
+    padding: 0.4rem;
+  }
+
+  .closeIconActive {
+    padding: 0.8rem;
+    left: 35%;
+  }
 }
