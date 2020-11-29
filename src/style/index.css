@@ -3,6 +3,10 @@
   /* display: flex; */
 }
 
+.loaderContainer {
+  transition: all 1s ease-in-out;
+}
+
 /* Default colors */
 body {
   --text-color: #222;

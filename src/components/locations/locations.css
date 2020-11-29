@@ -1,5 +1,6 @@
 .locationInfo {
-  position: absolute;
+  position: fixed;
+  z-index: 200;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
   color: #fff;
@@ -8,6 +9,12 @@
   transition: all 1s ease-in;
   align-items: center;
   text-align: center;
+}
+
+h2 span {
+  font-size: 1rem;
+  text-align: center;
+  padding: 0.5rem;
 }
 
 @media (min-width: 880px) {
@@ -25,7 +32,7 @@
   .locationInfo {
     right: 0;
     left: 0;
-    bottom: 4rem;
+    bottom: 6.5rem;
     padding: 0.3rem;
     margin: 0.4rem;
     min-height: 8rem;

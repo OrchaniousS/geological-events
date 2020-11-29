@@ -1,0 +1,154 @@
+.sideContainer {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+  width: 18%;
+  background: rgb(44, 44, 46);
+  color: rgb(200, 195, 188);
+  text-shadow: 0 0 0.4rem black;
+  font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  overflow-x: auto;
+  transition: all 1s ease-in;
+  filter: drop-shadow(0 0 0.3rem black);
+}
+
+.sideContainer h2 {
+  font-size: 1.5rem;
+}
+
+.eventsHeader {
+  background: grey;
+  padding: 0.1rem 1rem;
+  background: rgba(59, 59, 65, 0.623);
+  margin: 0.1rem;
+}
+
+.eventsHeader > div {
+  padding: 0.1rem;
+}
+
+.eventsContainer {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 1rem; */
+  padding: 0.1rem 0;
+  cursor: pointer;
+}
+
+.events {
+  display: flex;
+  flex-direction: row;
+  padding: 0.8rem;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.events:hover {
+  background: rgb(53, 53, 53);
+}
+
+.eventLogo {
+  margin-left: -0.4rem;
+  padding: 0.5rem;
+  filter: drop-shadow(0 0 0.4rem black);
+}
+
+.eventInfo h5 {
+  margin: 0.2rem;
+}
+
+.eventInfo span {
+  font-size: 0.8rem;
+  margin: 0.3rem;
+}
+
+@media (max-width: 1000px) {
+  .sideContainer {
+    display: none;
+  }
+}
+
+@media (min-width: 1000px) {
+  .sideContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Filter */
+
+.dateFilter {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  text-align-last: center;
+  margin: 0.6rem;
+  text-align-last: left;
+}
+
+.dateHeader {
+  padding: 0.2rem;
+}
+
+.dateFilterContainer {
+  display: flex;
+}
+
+.dataSelect {
+  display: flex;
+  flex-direction: column;
+  color: rgb(189, 189, 189);
+  background: none;
+  outline: none;
+  border: 0;
+  border-bottom: 1px solid rgb(134, 134, 134);
+  height: 1rem;
+  /* width: fit-content; */
+  padding: 0.2rem;
+  overflow: hidden;
+  transition: all 1s ease-out;
+  text-shadow: 0 0 0.2rem black;
+}
+
+.dataSelect:hover {
+  height: 3rem;
+  transition: all 1s ease-in;
+}
+
+.dataSelect div {
+  padding: 0.1rem;
+  height: 1.6rem;
+}
+
+.dataSelect div,
+.dateSelect div:focus,
+.dateSelect div:active {
+  cursor: pointer;
+  outline: none;
+  width: inherit;
+}
+
+.dateSelect > div:hover {
+  background: grey;
+}
+
+/*scroll bar*/
+.sideContainer::-webkit-scrollbar {
+  width: 1em;
+}
+
+.sideContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.sideContainer::-webkit-scrollbar-thumb {
+  background-color: rgb(122, 122, 122);
+  outline: 1px solid slategrey;
+}
+
+.sideContainer::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(170, 170, 170);
+  outline: 1px solid rgb(109, 150, 192);
+}

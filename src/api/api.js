@@ -7,6 +7,7 @@ export const loadNasaApi = async () => {
     return events.map(({ categories, geometries, link, title }) => ({
       categories,
       geometries,
+      date: new Date(geometries[0].date).toLocaleDateString(),
       link,
       title,
     }))

@@ -11,18 +11,23 @@ export default function App() {
   const [nasaEvents, setNasaEvents] = useState([])
 
   useEffect(() => {
+    // NASA API EONET DATA
     const fetchAPI = async () => {
-      setApiNotLoaded(true)
       const data = await loadNasaApi()
       setNasaEvents(data)
+      setApiNotLoaded(true)
     }
     fetchAPI()
+
+    // to do --USGS API DATA
   }, [])
 
   return (
     <>
       <Header />
-      {apiNotLoaded ? <ReactGoogleMap nasaEvents={nasaEvents} /> : <Loader />}
+      <div className="loaderContainer">
+        {apiNotLoaded ? <ReactGoogleMap nasaEvents={nasaEvents} /> : <Loader />}
+      </div>
     </>
   )
 }

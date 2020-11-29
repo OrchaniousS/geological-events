@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
 import arrowUpBoldBoxOutline from "@iconify-icons/mdi/arrow-up-bold-box-outline"
 
@@ -6,6 +6,16 @@ import "../style/header.css"
 
 const Header = () => {
   const [headerStatus, setHeaderStatus] = useState(true)
+
+  useEffect(() => {
+    window.onresize = () => {
+      if (window.innerWidth > 880) {
+        setHeaderStatus(true)
+      } else {
+        setHeaderStatus(false)
+      }
+    }
+  }, [])
 
   return (
     <header>
