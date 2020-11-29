@@ -1,8 +1,9 @@
-# Geological Events Website [Live Site](https://geological-events.web.app/)
+# Natural Events Website [Live Site](https://geological-events.web.app/)
 
 ## API`s used
 
 - https://api.nasa.gov/
+- https://earthquake.usgs.gov/fdsnws/event/1/
 - Private Google Map Key
 
 ## Introduction
@@ -26,11 +27,9 @@ _Mobile View_
 
 ### TO DO
 
-- add more Geo/Nature Events.
-  -- https://earthquake.usgs.gov/fdsnws/event/1/
-  -- https://earthquake.usgs.gov/earthquakes/map/?extent=-81.87364,-397.96875&extent=84.47406,164.53125
-- add Filter by Icon.
-- add Trackable Events by date and lat/lng cords.
+- Add more Geo/Nature Events. - In Progress
+- Add Filter by Icon. - Done!
+- Add Trackable Events by date and lat/lng cords. - Done!
 
 ### Packages used
 

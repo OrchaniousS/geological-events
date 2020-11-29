@@ -17,11 +17,13 @@ import iceShelfMelting from "@iconify-icons/openmoji/ice-shelf-melting"
 
 import "../../style/map.css"
 
-const ReactGoogleMap = ({ nasaEvents, center }) => {
+const ReactGoogleMap = ({ nasaEvents, center, zoom }) => {
   const [locationInfo, setLocationInfo] = useState(null)
   const [centerDefault, setCenterDefault] = useState(null)
+  const [zoomDefault, setZoomDefault] = useState(null)
 
   center = { lat: 32.8823157, lng: 34.7500211 }
+  zoom = 1
 
   useEffect(() => {}, [])
 
@@ -71,7 +73,8 @@ const ReactGoogleMap = ({ nasaEvents, center }) => {
                   geometries[0].coordinates.length === 2
                     ? geometries[0].coordinates[0]
                     : geometries[0].coordinates[0][0][0],
-              })
+              }),
+              setZoomDefault(5)
             )
           }}
           iconName={iconHandler}
@@ -84,6 +87,7 @@ const ReactGoogleMap = ({ nasaEvents, center }) => {
     <>
       <SideInfo
         onClickPointer={val => setCenterDefault(val)}
+        onClickPointerZoom={val => setZoomDefault(val)}
         onClickEvent={val => setLocationInfo(val)}
         nasaEventsInfo={nasaEvents}
         icons={iconHandler}
@@ -92,7 +96,7 @@ const ReactGoogleMap = ({ nasaEvents, center }) => {
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_KEY }}
           center={!centerDefault ? center : centerDefault}
-          zoom={!centerDefault ? 1 : 7}
+          zoom={!centerDefault ? zoom : zoomDefault}
         >
           {trackerPointer}
         </GoogleMapReact>

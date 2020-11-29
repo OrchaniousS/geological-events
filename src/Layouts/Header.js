@@ -22,7 +22,7 @@ const Header = () => {
       {headerStatus ? (
         <>
           <div>
-            <h1>Geological Events by NASA</h1>
+            <h1>Natural Events | NASA | USGS |</h1>
           </div>
           <div>
             <Icon

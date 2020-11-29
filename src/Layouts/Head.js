@@ -5,11 +5,11 @@ export default function Head() {
   return (
     <>
       <Helmet>
-        <title>Nature Events | NASA API</title>
+        <title>Natural Events | NASA | USGS |</title>
         <html lang="en" />
         <meta
           name="description"
-          content=" Nature and Geological Events around the globe website. Made with NASA API, Google Map API Gatsby,React, PWA(Fully offline support)."
+          content=" Natural and Geological Events around the globe website. Made with NASA API, Google Map API Gatsby,React, PWA(Fully offline support)."
         />
       </Helmet>
     </>
