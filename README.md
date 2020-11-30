@@ -27,7 +27,7 @@ _Mobile View_
 
 ### TO DO
 
-- Add more Geo/Nature Events. - In Progress
+- Add more Geo/Nature Events. - Done!
 - Add Filter by Icon. - Done!
 - Add Trackable Events by date and lat/lng cords. - Done!
 

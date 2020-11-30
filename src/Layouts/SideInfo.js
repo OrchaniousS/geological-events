@@ -10,10 +10,27 @@ const SideInfo = ({
   onClickPointerZoom,
   onClickEvent,
   nasaEventsInfo,
+  usgsEvents,
   icons,
+  icons2,
 }) => {
   const [dateFilterState, setDateFilterState] = useState(false)
   const [iconFilter, setIconFilter] = useState(null)
+  const [nasaData, setNasaData] = useState(true)
+  const [usgsData, setUsgsData] = useState(false)
+  const [activeThumb, setActiveThumb] = useState("activeThumb")
+
+  const nasaUsgsDataHandler = val => {
+    if (val) {
+      setUsgsData(val)
+      setNasaData(!val)
+      setActiveThumb("activeThumb")
+    } else {
+      setUsgsData(val)
+      setNasaData(!val)
+      setActiveThumb("activeThumb")
+    }
+  }
 
   const iconHandlerArray = [
     { id: 6, iconHolder: icons.drought, className: "droughtIcon" },
@@ -32,29 +49,33 @@ const SideInfo = ({
     arr.filter((item, index) => arr.indexOf(item) !== index)
   let availableIDS = [...new Set(removeDuplication(filterExistingIdsArray))]
 
-  const dateFilterHandler = (
-    <div className="dateFilter">
-      <div className="dateFilterContainer">
-        <div className="dateHeader">Date</div>
-        <div className="dataSelect">
-          <div
-            role="button"
-            tabIndex="0"
-            onClick={() => setDateFilterState(false)}
-            onKeyDown={() => setDateFilterState(false)}
-          >
-            <div>Newest First</div>
-          </div>
-          <div
-            role="button"
-            tabIndex="0"
-            onClick={() => setDateFilterState(true)}
-            onKeyDown={() => setDateFilterState(true)}
-          >
-            Oldest First
-          </div>
+  const dateFilterByOrder = (
+    <div className="dateFilterContainer">
+      <div className="dateHeader">Date</div>
+      <div className="dataSelect">
+        <div
+          role="button"
+          tabIndex="0"
+          onClick={() => setDateFilterState(false)}
+          onKeyDown={() => setDateFilterState(false)}
+        >
+          <div>Newest First</div>
+        </div>
+        <div
+          role="button"
+          tabIndex="0"
+          onClick={() => setDateFilterState(true)}
+          onKeyDown={() => setDateFilterState(true)}
+        >
+          Oldest First
         </div>
       </div>
+    </div>
+  )
+
+  const dateFilterHandler = (
+    <div className="dateFilter">
+      {dateFilterByOrder}
       <div className="iconSelectContainer">
         <div>Events/Icons</div>
         <div className="iconSelect">
@@ -74,6 +95,7 @@ const SideInfo = ({
     </div>
   )
 
+  // NASA MAP - NATURAL EVENTS
   const mapEvents =
     iconFilter === null
       ? nasaEventsInfo.map(({ categories, geometries, date, link, title }) => (
@@ -200,17 +222,121 @@ const SideInfo = ({
             )
         )
 
+  // USGS MAP - EARTH QUAKES
+  const usgsMapEvents = usgsEvents.map(
+    ({ type, fullDate, minDate, coordinates, mag, title, place, id }) => (
+      <div
+        key={id}
+        role="button"
+        tabIndex="0"
+        className="events"
+        onClick={() => {
+          return (
+            onClickEvent({
+              type: type,
+              date: fullDate,
+              mag: mag,
+              title,
+            }),
+            onClickPointer({
+              lat: coordinates[1],
+              lng: coordinates[0],
+            }),
+            onClickPointerZoom(5)
+          )
+        }}
+        onKeyDown={() => {
+          return (
+            onClickEvent({
+              type: type,
+              date: fullDate,
+              mag: mag,
+              title,
+            }),
+            onClickPointer({
+              lat: coordinates[1],
+              lng: coordinates[0],
+            }),
+            onClickPointerZoom(5)
+          )
+        }}
+      >
+        <div className="eventLogo">
+          <IconHandler
+            type={type}
+            idEvent={iconFilter}
+            iconName2={icons2}
+            mag={mag}
+          />
+        </div>
+        <div className="eventInfo">
+          <h5>
+            {type.toUpperCase().charAt(0) +
+              type.slice(0) +
+              " " +
+              title.split("-")[0]}
+          </h5>
+          <span>{place}</span>
+          <span>{minDate}</span>
+          <br />
+          <span>{fullDate}</span>
+        </div>
+      </div>
+    )
+  )
+
   return (
     <>
-      <div className="sideContainer">
-        <div className="eventsHeader">
-          <h2>Natural Events around the world, Last Year</h2>
-          <div>{nasaEventsInfo.length} events.</div>
-          <div>{dateFilterHandler}</div>
+      <div className="mainContainer">
+        <div className="eventsTypeHandler">
+          <div
+            className={nasaData && activeThumb}
+            role="button"
+            tabIndex="0"
+            onClick={() => nasaUsgsDataHandler(false)}
+            onKeyDown={() => nasaUsgsDataHandler(false)}
+          >
+            Natural
+          </div>
+          <div
+            className={usgsData && activeThumb}
+            role="button"
+            tabIndex="0"
+            onClick={() => nasaUsgsDataHandler(true)}
+            onKeyDown={() => nasaUsgsDataHandler(true)}
+          >
+            Earthquakes
+          </div>
         </div>
-        <div className="eventsContainer">
-          {}
-          {dateFilterState ? mapEvents.reverse() : mapEvents}
+        <div className="sideContainer">
+          <div className="fadeInDiv">
+            {nasaData && (
+              <>
+                <div className="eventsHeader">
+                  <h2>Natural Events around the world, Last Year</h2>
+                  <div>{nasaEventsInfo.length} events.</div>
+                  <div>{dateFilterHandler}</div>
+                </div>
+                <div className="eventsContainer">
+                  {dateFilterState ? mapEvents.reverse() : mapEvents}
+                </div>
+              </>
+            )}
+          </div>
+          <div className="fadeInDiv">
+            {usgsData && (
+              <div>
+                <div className="eventsHeader">
+                  <h2>Earthquakes around the world, Last Day</h2>
+                  <div>{usgsEvents.length} events.</div>
+                  <div>{dateFilterByOrder}</div>
+                </div>
+                <div className="eventsContainer">
+                  {dateFilterState ? usgsMapEvents.reverse() : usgsMapEvents}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

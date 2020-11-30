@@ -1,10 +1,72 @@
+.mainContainer {
+  width: 18%;
+}
+
+.fadeInDiv {
+  transition: all 0.5s ease-in;
+}
+
+.eventsTypeHandler {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1 1 50%;
+  z-index: 51;
+  height: 8%;
+  overflow: hidden;
+  /* width: 10%; */
+  place-content: center;
+  transition: all 1s ease-in;
+  border: 0;
+}
+
+.eventsTypeHandler div {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  place-content: center;
+  align-items: center;
+  border: 0;
+  transition: all 0.4s ease-in;
+}
+
+.eventsTypeHandler > div:hover {
+  background: rgb(61, 107, 153);
+  border: 0;
+  transition: all 0.2s ease-in;
+}
+
+.activeThumb {
+  border: 0 solid transparent;
+  outline: 0;
+  border-radius: 10px;
+  margin: 1% 0;
+  background: rgb(61, 107, 153);
+  transition: all 0.4s ease-in;
+}
+
+.activeThumb:focus,
+.activeThumb:hover {
+  border: 0;
+  outline: 0;
+}
+
 .sideContainer {
+  z-index: 50;
+  padding-top: 4%;
+}
+
+.sideContainer,
+.eventsTypeHandler {
   position: fixed;
   top: 64px;
   left: 0;
   bottom: 0;
-  z-index: 50;
-  width: 18%;
   background: rgb(44, 44, 46);
   color: rgb(200, 195, 188);
   text-shadow: 0 0 0.4rem black;
@@ -12,6 +74,7 @@
   overflow-x: auto;
   transition: all 1s ease-in;
   filter: drop-shadow(0 0 0.3rem black);
+  width: inherit;
 }
 
 .sideContainer h2 {
@@ -65,7 +128,8 @@
 }
 
 @media (max-width: 1000px) {
-  .sideContainer {
+  .sideContainer,
+  .eventsTypeHandler {
     display: none;
   }
 }

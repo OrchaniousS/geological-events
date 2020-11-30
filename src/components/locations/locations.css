@@ -80,6 +80,27 @@ h2 span {
 }
 
 .locationPointer .fireIcon:focus,
-.locationPointer .fireIcon:focus-visible {
+.locationPointer .fireIcon:focus-visible,
+.locationPointerEQ:focus,
+.locationPointerEQ:focus-visible {
   outline: none;
+}
+
+.locationPointerEQ {
+  cursor: pointer;
+  background: rgb(43, 38, 38);
+  filter: drop-shadow(0 0 0.2rem black);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  padding: 0.35rem;
+  width: auto;
+  position: fixed;
+  outline: none;
+}
+
+.locationPointerEQ > :hover {
+  font-size: 2.1rem;
+  padding: 0.5rem;
+  transition: all 0.4s ease-in;
 }

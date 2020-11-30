@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from "react"
 
-import ReactGoogleMap from "./map/map"
 import Header from "../Layouts/Header"
 import Loader from "../Layouts/Loader"
+import ReactGoogleMap from "./map/map"
 
-import { loadNasaApi } from "../api/api"
+import { loadNasaApi, loadUSGSApi } from "../api/api"
 
 export default function App() {
   const [apiNotLoaded, setApiNotLoaded] = useState(false)
   const [nasaEvents, setNasaEvents] = useState([])
+  const [usgsEvents, setUsgsEvents] = useState([])
 
   useEffect(() => {
     // NASA API EONET DATA
     const fetchAPI = async () => {
       const data = await loadNasaApi()
+      const data2 = await loadUSGSApi()
       setNasaEvents(data)
+      setUsgsEvents(data2)
       setApiNotLoaded(true)
     }
     fetchAPI()
-
-    // to do --USGS API DATA
   }, [])
 
   return (
     <>
       <Header />
       <div className="loaderContainer">
-        {apiNotLoaded ? <ReactGoogleMap nasaEvents={nasaEvents} /> : <Loader />}
+        {apiNotLoaded ? (
+          <ReactGoogleMap nasaEvents={nasaEvents} usgsEvents={usgsEvents} />
+        ) : (
+          <Loader />
+        )}
       </div>
     </>
   )

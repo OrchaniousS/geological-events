@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import GoogleMapReact from "google-map-react"
 
 import SideInfo from "../../Layouts/SideInfo"
@@ -14,18 +14,17 @@ import floodWarning from "@iconify-icons/carbon/flood-warning"
 import tropicalStormTracks from "@iconify-icons/carbon/tropical-storm-tracks"
 import volcanoIcon from "@iconify-icons/emojione-monotone/volcano"
 import iceShelfMelting from "@iconify-icons/openmoji/ice-shelf-melting"
+import earthquakeIcon from "@iconify/icons-openmoji/earthquake"
 
 import "../../style/map.css"
 
-const ReactGoogleMap = ({ nasaEvents, center, zoom }) => {
+const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
   const [locationInfo, setLocationInfo] = useState(null)
   const [centerDefault, setCenterDefault] = useState(null)
   const [zoomDefault, setZoomDefault] = useState(null)
 
   center = { lat: 32.8823157, lng: 34.7500211 }
   zoom = 1
-
-  useEffect(() => {}, [])
 
   const iconHandler = {
     drought: droughtIcon,
@@ -83,6 +82,35 @@ const ReactGoogleMap = ({ nasaEvents, center, zoom }) => {
       )
   )
 
+  // USGS API DATA
+  const earthQuakeTracker = usgsEvents.map(
+    ({ type, fullDate, minDate, coordinates, mag, title, place, id }) => (
+      <LocationPointer
+        type={type}
+        key={id}
+        idEvent={id}
+        lat={coordinates[1]}
+        lng={coordinates[0]}
+        iconName2={earthquakeIcon}
+        mag={mag}
+        onClickEvent={() => {
+          return (
+            setLocationInfo({
+              type: type,
+              date: fullDate,
+              mag: mag,
+              title,
+            }),
+            setCenterDefault({
+              lat: coordinates[1],
+              lng: coordinates[0],
+            })
+          )
+        }}
+      />
+    )
+  )
+
   return (
     <>
       <SideInfo
@@ -90,7 +118,9 @@ const ReactGoogleMap = ({ nasaEvents, center, zoom }) => {
         onClickPointerZoom={val => setZoomDefault(val)}
         onClickEvent={val => setLocationInfo(val)}
         nasaEventsInfo={nasaEvents}
+        usgsEvents={usgsEvents}
         icons={iconHandler}
+        icons2={earthquakeIcon}
       />
       <div className="mapContainer">
         <GoogleMapReact
@@ -99,6 +129,7 @@ const ReactGoogleMap = ({ nasaEvents, center, zoom }) => {
           zoom={!centerDefault ? zoom : zoomDefault}
         >
           {trackerPointer}
+          {earthQuakeTracker}
         </GoogleMapReact>
         {locationInfo && <LocationInfo locationInfo={locationInfo} />}
       </div>

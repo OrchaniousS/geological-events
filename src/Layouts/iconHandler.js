@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
 
-const IconHandler = ({ idEvent, iconName }) => {
+const IconHandler = ({ type, idEvent, iconName, iconName2, mag }) => {
   const [iconClass, setIconClass] = useState("")
   const [icon, setIcon] = useState()
 
@@ -23,6 +23,10 @@ ID 19 - Manmade
  */
 
   useEffect(() => {
+    if (type === "earthquake") {
+      setIconClass("earthquakeIcon")
+      setIcon(iconName2)
+    }
     if (idEvent === 6) {
       setIconClass("droughtIcon")
       setIcon(iconName.drought)
@@ -51,9 +55,24 @@ ID 19 - Manmade
       setIconClass("icebergIcon")
       setIcon(iconName.iceberg)
     }
-  }, [idEvent, iconName])
+  }, [type, idEvent, iconName, iconName2])
 
-  return <Icon className={iconClass} icon={icon} />
+  return (
+    <>
+      {type ? (
+        <>
+          <div className="earthquakeIconHolder">
+            {mag}
+            <Icon className={iconClass} icon={icon} />
+          </div>
+        </>
+      ) : (
+        <>
+          <Icon className={iconClass} icon={icon} />
+        </>
+      )}
+    </>
+  )
 }
 
 export default IconHandler
