@@ -46,7 +46,8 @@ const SideInfo = ({
     ({ categories }) => categories[0].id
   )
   let removeDuplication = arr =>
-    arr.filter((item, index) => arr.indexOf(item) !== index)
+    arr.filter((item, index) => arr.indexOf(index) !== item)
+
   let availableIDS = [...new Set(removeDuplication(filterExistingIdsArray))]
 
   const dateFilterByOrder = (
@@ -290,7 +291,7 @@ const SideInfo = ({
       <div className="mainContainer">
         <div className="eventsTypeHandler">
           <div
-            className={nasaData && activeThumb}
+            className={nasaData ? activeThumb : ""}
             role="button"
             tabIndex="0"
             onClick={() => nasaUsgsDataHandler(false)}
@@ -299,7 +300,7 @@ const SideInfo = ({
             Natural
           </div>
           <div
-            className={usgsData && activeThumb}
+            className={usgsData ? activeThumb : ""}
             role="button"
             tabIndex="0"
             onClick={() => nasaUsgsDataHandler(true)}

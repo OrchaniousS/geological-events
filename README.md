@@ -21,7 +21,7 @@ With filter interaction of dates and events.
 - Offline Support.
 
 _Desktop View_
-![Alt text](/Examples/ss1d.jpg "Desktop Page")
+![Alt text](/Examples/ss1desktop.jpg "Desktop Page")
 _Mobile View_
 ![Alt text](/Examples/ss1mobile.jpg "Mobile Page")
 
@@ -29,6 +29,7 @@ _Mobile View_
 
 - Add more Geo/Nature Events. - Done!
 - Add Filter by Icon. - Done!
+- Add Array of events by date. - Done!
 - Add Trackable Events by date and lat/lng cords. - Done!
 
 ### Packages used

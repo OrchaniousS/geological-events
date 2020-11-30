@@ -17,8 +17,19 @@ export const loadNasaApi = async () => {
   }
 }
 
-const urlUSGS =
-  "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2020-11-29&endtime=2020-11-30&minmagnitude=2.5"
+const dateHandlerToday = {
+  todayDayOfMonth: new Date().getDate(),
+  todayMonth: new Date().getMonth() + 1,
+  todayYear: new Date().getFullYear(),
+}
+
+const dateHandlerNextDay = {
+  nextDay: new Date(Date.now() + 86400000).getDate(),
+  nextMonth: new Date(Date.now() + 86400000).getMonth() + 1,
+  nextYear: new Date(Date.now() + 86400000).getFullYear(),
+}
+
+const urlUSGS = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${dateHandlerToday.todayYear}-${dateHandlerToday.todayMonth}-${dateHandlerToday.todayDayOfMonth}&endtime=${dateHandlerNextDay.nextYear}-${dateHandlerNextDay.nextMonth}-${dateHandlerNextDay.nextDay}&minmagnitude=2.5`
 
 export const loadUSGSApi = async () => {
   const earthquakesData = await fetch(urlUSGS)

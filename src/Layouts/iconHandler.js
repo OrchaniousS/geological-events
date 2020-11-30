@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Icon } from "@iconify/react"
 
 const IconHandler = ({ type, idEvent, iconName, iconName2, mag }) => {
@@ -22,8 +22,12 @@ ID 18 - Temperature Extremes
 ID 19 - Manmade
  */
 
+  const idEventCurrent = useRef(() => {})
+  idEventCurrent.current = async val => (val === "" ? (idEvent = "") : null)
+
   useEffect(() => {
-    if (type === "earthquake") {
+    if (typeof idEvent !== Number && type === "earthquake") {
+      idEventCurrent.current("")
       setIconClass("earthquakeIcon")
       setIcon(iconName2)
     }

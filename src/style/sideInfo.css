@@ -1,11 +1,29 @@
 .mainContainer {
   width: 18%;
+  overflow-x: auto;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  bottom: 0;
+  z-index: 52;
+  background: #4568dc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .fadeInDiv {
   transition: all 0.5s ease-in;
 }
 
+/* Events Chooser */
 .eventsTypeHandler {
   display: flex;
   flex-direction: row;
@@ -14,7 +32,6 @@
   z-index: 51;
   height: 8%;
   overflow: hidden;
-  /* width: 10%; */
   place-content: center;
   transition: all 1s ease-in;
   border: 0;
@@ -36,17 +53,16 @@
 }
 
 .eventsTypeHandler > div:hover {
-  background: rgb(61, 107, 153);
+  background: rgba(198, 208, 218, 0.459);
   border: 0;
+  outline: 0;
+  border-radius: 10px;
   transition: all 0.2s ease-in;
 }
 
 .activeThumb {
-  border: 0 solid transparent;
   outline: 0;
-  border-radius: 10px;
-  margin: 1% 0;
-  background: rgb(61, 107, 153);
+  background: rgba(255, 255, 255, 0.349);
   transition: all 0.4s ease-in;
 }
 
@@ -55,26 +71,30 @@
   border: 0;
   outline: 0;
 }
+/* Events Chooser - END */
 
 .sideContainer {
   z-index: 50;
-  padding-top: 4%;
+  /* filter: drop-shadow(0 0 0.3rem black); */
 }
 
 .sideContainer,
 .eventsTypeHandler {
-  position: fixed;
-  top: 64px;
-  left: 0;
-  bottom: 0;
-  background: rgb(44, 44, 46);
+  background: #4568dc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: rgb(200, 195, 188);
   text-shadow: 0 0 0.4rem black;
   font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
-  overflow-x: auto;
   transition: all 1s ease-in;
-  filter: drop-shadow(0 0 0.3rem black);
-  width: inherit;
 }
 
 .sideContainer h2 {
@@ -128,8 +148,7 @@
 }
 
 @media (max-width: 1000px) {
-  .sideContainer,
-  .eventsTypeHandler {
+  .mainContainer {
     display: none;
   }
 }
@@ -250,20 +269,22 @@
 /* FILTER - END */
 
 /*scroll bar*/
-.sideContainer::-webkit-scrollbar {
+.mainContainer::-webkit-scrollbar {
   width: 1em;
 }
 
-.sideContainer::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+.mainContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0.5rem rgba(255, 255, 255, 0.3);
 }
 
-.sideContainer::-webkit-scrollbar-thumb {
-  background-color: rgb(122, 122, 122);
-  outline: 1px solid slategrey;
+.mainContainer::-webkit-scrollbar-thumb {
+  background-color: rgb(87, 80, 80);
+  outline: 0 solid rgb(109, 150, 192);
 }
 
-.sideContainer::-webkit-scrollbar-thumb:hover {
+.mainContainer::-webkit-scrollbar-thumb:hover {
   background-color: rgb(170, 170, 170);
-  outline: 1px solid rgb(109, 150, 192);
+  outline: 0 solid rgb(109, 150, 192);
 }
+
+/*scroll bar*/
