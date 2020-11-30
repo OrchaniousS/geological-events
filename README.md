@@ -21,7 +21,7 @@ With filter interaction of dates and events.
 - Offline Support.
 
 _Desktop View_
-![Alt text](/Examples/ss1desktop.jpg "Desktop Page")
+![Alt text](/Examples/ss1d.jpg "Desktop Page")
 _Mobile View_
 ![Alt text](/Examples/ss1mobile.jpg "Mobile Page")
 
