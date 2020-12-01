@@ -4,7 +4,7 @@
 
 - https://api.nasa.gov/
 - https://earthquake.usgs.gov/fdsnws/event/1/
-- Private Google Map Key
+- Google Maps API + Private Google Map Key
 
 ## Introduction
 
@@ -39,4 +39,5 @@ _Mobile View_
 - Google Map React
 - Redux ( React and Gatsby)
 - Iconify by React
+- nprogress (cool UI progress loader)
 - Firebase (Deployment)

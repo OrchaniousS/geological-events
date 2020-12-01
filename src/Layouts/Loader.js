@@ -1,27 +1,33 @@
-import React from "react"
+import React, { useEffect } from "react"
 import LoaderSVG from "../images/loader.svg"
+import NProgress from "nprogress"
 
-export default function loader() {
+const Loader = () => {
+  useEffect(() => {
+    NProgress.configure({
+      // parent: "#loaderContent",
+      minimum: 0.1,
+      easing: "ease",
+      trickleSpeed: 800,
+      speed: 200,
+    })
+    NProgress.set(0.0)
+    NProgress.set(0.4)
+    NProgress.set(1.0)
+  }, [])
   return (
     <>
-      <div
-        key={`loader`}
-        id="___loader"
-        style={{
-          alignItems: "center",
-          backgroundColor: "#F2F2F2",
-          display: "flex",
-          justifyContent: "center",
-          position: "absolute",
-          left: 0,
-          top: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 100,
-        }}
-      >
-        <img src={LoaderSVG} alt="loading spinner" width="150" height="150" />
+      <div id="___loader">
+        <img
+          id="loaderContent"
+          src={LoaderSVG}
+          alt="loading spinner"
+          width="150"
+          height="150"
+        />
       </div>
     </>
   )
 }
+
+export default Loader

@@ -3,6 +3,37 @@
   /* display: flex; */
 }
 
+#___loader {
+  opacity: 75%;
+  background: #141e30; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #243b55,
+    #141e30
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #243b55,
+    #141e30
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  display: fixed;
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  right: 50%;
+  bottom: 50%;
+  z-index: 100;
+  transition: all 1s ease-out;
+  text-align: center;
+  display: block;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .loaderContainer {
   transition: all 1s ease-in-out;
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import GoogleMapReact from "google-map-react"
+import Loader from "../../Layouts/Loader"
 
 import SideInfo from "../../Layouts/SideInfo"
 import LocationPointer from "../locations/locationPointer"
@@ -132,24 +133,27 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
 
   return (
     <>
-      <SideInfo
-        onClickPointer={val => setCenterDefault(val)}
-        onClickPointerZoom={val => setZoomDefault(val)}
-        onClickEvent={val => setLocationInfo(val)}
-        onClickActiveEvent={val => setActiveTitle(val)}
-        nasaEventsInfo={nasaEvents}
-        usgsEvents={usgsEvents}
-        icons={iconHandler}
-        icons2={earthquakeIcon}
-      />
+      {/* Loader has been moved to here for better UI UX */}
+      {nasaEvents.length > 1 && (
+        <SideInfo
+          onClickPointer={val => setCenterDefault(val)}
+          onClickPointerZoom={val => setZoomDefault(val)}
+          onClickEvent={val => setLocationInfo(val)}
+          onClickActiveEvent={val => setActiveTitle(val)}
+          nasaEventsInfo={nasaEvents}
+          usgsEvents={usgsEvents}
+          icons={iconHandler}
+          icons2={earthquakeIcon}
+        />
+      )}
       <div className="mapContainer">
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_KEY }}
           center={!centerDefault ? center : centerDefault}
           zoom={!centerDefault ? zoom : zoomDefault}
         >
-          {trackerPointer}
-          {earthQuakeTracker}
+          {nasaEvents.length > 1 ? trackerPointer : <Loader />}
+          {usgsEvents.length > 1 ? earthQuakeTracker : <Loader />}
         </GoogleMapReact>
         {locationInfo && <LocationInfo locationInfo={locationInfo} />}
       </div>

@@ -1,6 +1,15 @@
 module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // // Setting a color is optional.
+        color: `dodgerblue`,
+        // Disable the loading spinner.
+        showSpinner: true,
+      },
+    },
     `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-manifest`,

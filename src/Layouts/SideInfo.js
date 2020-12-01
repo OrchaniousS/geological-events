@@ -436,6 +436,9 @@ const SideInfo = ({
                       .reverse()}
                   {magFilterState == 0 &&
                     usgsMapEvents.sort((a, b) => a.props.mag - b.props.mag)}
+                  {dateFilterState === null && magFilterState === null
+                    ? usgsMapEvents
+                    : null}
                 </div>
               </div>
             )}

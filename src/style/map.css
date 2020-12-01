@@ -1,3 +1,7 @@
+* {
+  /* transition: all 0.01s ease-in; */
+}
+
 .mapContainer {
   left: 0;
   top: 0;
@@ -7,6 +11,7 @@
   height: 100%;
   width: 100%;
   justify-content: center;
+  /* transition: all 1s ease-in; */
 }
 
 .droughtIcon {
