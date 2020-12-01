@@ -11,10 +11,12 @@ const LocationPointer = ({
   iconName,
   iconName2,
   mag,
+  idHolder,
 }) => {
   return (
     <>
       <div
+        id={idHolder ? idHolder : ""}
         role="button"
         className={type ? "locationPointerEQ" : "locationPointer"}
         onClick={onClickEvent}

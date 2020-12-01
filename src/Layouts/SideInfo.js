@@ -9,17 +9,21 @@ const SideInfo = ({
   onClickPointer,
   onClickPointerZoom,
   onClickEvent,
+  onClickActiveEvent,
   nasaEventsInfo,
   usgsEvents,
   icons,
   icons2,
 }) => {
-  const [dateFilterState, setDateFilterState] = useState(false)
+  const [dateFilterState, setDateFilterState] = useState(null)
+  const [magFilterState, setMagFilterState] = useState(null)
   const [iconFilter, setIconFilter] = useState(null)
   const [nasaData, setNasaData] = useState(true)
   const [usgsData, setUsgsData] = useState(false)
   const [activeThumb, setActiveThumb] = useState("activeThumb")
+  const [activeTitle, setActiveTitle] = useState("")
 
+  // Which event tab to present
   const nasaUsgsDataHandler = val => {
     if (val) {
       setUsgsData(val)
@@ -42,6 +46,7 @@ const SideInfo = ({
     { id: 15, iconHolder: icons.iceberg, className: "icebergIcon" },
   ]
 
+  // Present available Events Icons
   let filterExistingIdsArray = nasaEventsInfo.map(
     ({ categories }) => categories[0].id
   )
@@ -50,6 +55,7 @@ const SideInfo = ({
 
   let availableIDS = [...new Set(removeDuplication(filterExistingIdsArray))]
 
+  // Date Filter
   const dateFilterByOrder = (
     <div className="dateFilterContainer">
       <div className="dateHeader">Date</div>
@@ -57,16 +63,28 @@ const SideInfo = ({
         <div
           role="button"
           tabIndex="0"
-          onClick={() => setDateFilterState(false)}
-          onKeyDown={() => setDateFilterState(false)}
+          onClick={() => {
+            setDateFilterState(true)
+            setMagFilterState(null)
+          }}
+          onKeyDown={() => {
+            setDateFilterState(true)
+            setMagFilterState(null)
+          }}
         >
           <div>Newest First</div>
         </div>
         <div
           role="button"
           tabIndex="0"
-          onClick={() => setDateFilterState(true)}
-          onKeyDown={() => setDateFilterState(true)}
+          onClick={() => {
+            setDateFilterState(false)
+            setMagFilterState(null)
+          }}
+          onKeyDown={() => {
+            setDateFilterState(false)
+            setMagFilterState(null)
+          }}
         >
           Oldest First
         </div>
@@ -74,25 +92,68 @@ const SideInfo = ({
     </div>
   )
 
+  // Icon Filter
+  const filterByIcon = (
+    <div className="iconSelectContainer">
+      <div>Events/Icons</div>
+      <div className="iconSelect">
+        <button onClick={() => setIconFilter(null)}>All</button>
+        {iconHandlerArray.map(({ id, iconHolder, className }) =>
+          availableIDS.map(
+            item =>
+              id === item && (
+                <button key={id} onClick={() => setIconFilter(id)}>
+                  <Icon className={className} icon={iconHolder} />
+                </button>
+              )
+          )
+        )}
+      </div>
+    </div>
+  )
+
+  // Magnitude Filter
+  const filterByMagnitude = (
+    <div className="dateFilterContainer">
+      <div className="dateHeader">Magnitude</div>
+      <div className="dataSelect">
+        <div
+          role="button"
+          tabIndex="0"
+          onClick={() => {
+            setMagFilterState(true)
+            setDateFilterState(null)
+          }}
+          onKeyDown={() => {
+            setMagFilterState(true)
+            setDateFilterState(null)
+          }}
+        >
+          <div>Highest First</div>
+        </div>
+        <div
+          role="button"
+          tabIndex="0"
+          onClick={() => {
+            setMagFilterState(false)
+            setDateFilterState(null)
+          }}
+          onKeyDown={() => {
+            setMagFilterState(false)
+            setDateFilterState(null)
+          }}
+        >
+          Lowest First
+        </div>
+      </div>
+    </div>
+  )
+
+  // Filter Holder
   const dateFilterHandler = (
     <div className="dateFilter">
       {dateFilterByOrder}
-      <div className="iconSelectContainer">
-        <div>Events/Icons</div>
-        <div className="iconSelect">
-          <button onClick={() => setIconFilter(null)}>All</button>
-          {iconHandlerArray.map(({ id, iconHolder, className }) =>
-            availableIDS.map(
-              item =>
-                id === item && (
-                  <button key={id} onClick={() => setIconFilter(id)}>
-                    <Icon className={className} icon={iconHolder} />
-                  </button>
-                )
-            )
-          )}
-        </div>
-      </div>
+      {filterByIcon}
     </div>
   )
 
@@ -102,6 +163,7 @@ const SideInfo = ({
       ? nasaEventsInfo.map(({ categories, geometries, date, link, title }) => (
           <div
             key={link}
+            id={title === activeTitle ? "activeEventLocation" : ""}
             role="button"
             tabIndex="0"
             className="events"
@@ -123,7 +185,9 @@ const SideInfo = ({
                       ? geometries[0].coordinates[0]
                       : geometries[0].coordinates[0][0][0],
                 }),
-                onClickPointerZoom(5)
+                onClickPointerZoom(5),
+                onClickActiveEvent(title),
+                setActiveTitle(title)
               )
             }}
             onKeyDown={() => {
@@ -144,7 +208,9 @@ const SideInfo = ({
                       ? geometries[0].coordinates[0]
                       : geometries[0].coordinates[0][0][0],
                 }),
-                onClickPointerZoom(5)
+                onClickPointerZoom(5),
+                onClickActiveEvent(title),
+                setActiveTitle(title)
               )
             }}
           >
@@ -164,6 +230,7 @@ const SideInfo = ({
             categories[0].id === iconFilter && (
               <div
                 key={link}
+                id={title === activeTitle && "activeEventLocation"}
                 role="button"
                 tabIndex="0"
                 className="events"
@@ -185,7 +252,9 @@ const SideInfo = ({
                           ? geometries[0].coordinates[0]
                           : geometries[0].coordinates[0][0][0],
                     }),
-                    onClickPointerZoom(5)
+                    onClickPointerZoom(5),
+                    onClickActiveEvent(title),
+                    setActiveTitle(title)
                   )
                 }}
                 onKeyDown={() => {
@@ -206,7 +275,9 @@ const SideInfo = ({
                           ? geometries[0].coordinates[0]
                           : geometries[0].coordinates[0][0][0],
                     }),
-                    onClickPointerZoom(5)
+                    onClickPointerZoom(5),
+                    onClickActiveEvent(title),
+                    setActiveTitle(title)
                   )
                 }}
               >
@@ -225,9 +296,22 @@ const SideInfo = ({
 
   // USGS MAP - EARTH QUAKES
   const usgsMapEvents = usgsEvents.map(
-    ({ type, fullDate, minDate, coordinates, mag, title, place, id }) => (
+    ({
+      type,
+      updated,
+      fullDate,
+      minDate,
+      coordinates,
+      mag,
+      title,
+      place,
+      id,
+    }) => (
       <div
+        mag={mag}
+        updated={updated}
         key={id}
+        id={title === activeTitle ? "activeEventLocation" : ""}
         role="button"
         tabIndex="0"
         className="events"
@@ -243,7 +327,9 @@ const SideInfo = ({
               lat: coordinates[1],
               lng: coordinates[0],
             }),
-            onClickPointerZoom(5)
+            onClickPointerZoom(5),
+            onClickActiveEvent(title),
+            setActiveTitle(title)
           )
         }}
         onKeyDown={() => {
@@ -258,7 +344,9 @@ const SideInfo = ({
               lat: coordinates[1],
               lng: coordinates[0],
             }),
-            onClickPointerZoom(5)
+            onClickPointerZoom(5),
+            onClickActiveEvent(title),
+            setActiveTitle(title)
           )
         }}
       >
@@ -319,7 +407,7 @@ const SideInfo = ({
                   <div>{dateFilterHandler}</div>
                 </div>
                 <div className="eventsContainer">
-                  {dateFilterState ? mapEvents.reverse() : mapEvents}
+                  {dateFilterState ? mapEvents : mapEvents.reverse()}
                 </div>
               </>
             )}
@@ -331,9 +419,23 @@ const SideInfo = ({
                   <h2>Earthquakes around the world, Last Day</h2>
                   <div>{usgsEvents.length} events.</div>
                   <div>{dateFilterByOrder}</div>
+                  <div>{filterByMagnitude}</div>
                 </div>
                 <div className="eventsContainer">
-                  {dateFilterState ? usgsMapEvents.reverse() : usgsMapEvents}
+                  {dateFilterState == 1 &&
+                    usgsMapEvents
+                      .sort((a, b) => a.props.updated - b.props.updated)
+                      .reverse()}
+                  {dateFilterState == 0 &&
+                    usgsMapEvents.sort(
+                      (a, b) => a.props.updated - b.props.updated
+                    )}
+                  {magFilterState == 1 &&
+                    usgsMapEvents
+                      .sort((a, b) => a.props.mag - b.props.mag)
+                      .reverse()}
+                  {magFilterState == 0 &&
+                    usgsMapEvents.sort((a, b) => a.props.mag - b.props.mag)}
                 </div>
               </div>
             )}

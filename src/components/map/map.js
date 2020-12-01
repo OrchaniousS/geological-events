@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import GoogleMapReact from "google-map-react"
 
 import SideInfo from "../../Layouts/SideInfo"
@@ -22,9 +22,12 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
   const [locationInfo, setLocationInfo] = useState(null)
   const [centerDefault, setCenterDefault] = useState(null)
   const [zoomDefault, setZoomDefault] = useState(null)
+  const [activeTitle, setActiveTitle] = useState("")
 
   center = { lat: 32.8823157, lng: 34.7500211 }
   zoom = 1
+
+  useEffect(() => {}, [center, zoom])
 
   const iconHandler = {
     drought: droughtIcon,
@@ -43,6 +46,7 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
         <LocationPointer
           key={link}
           idEvent={categories[0].id}
+          idHolder={title === activeTitle && "activeEventLocationPointer"}
           lat={
             geometries[0].coordinates.length === 2
               ? geometries[0].coordinates[1]
@@ -58,7 +62,7 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
               // event info by pointer click
               setLocationInfo({
                 id: categories[0].id,
-                date: date,
+                date,
                 title,
                 link,
               }),
@@ -73,7 +77,8 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
                     ? geometries[0].coordinates[0]
                     : geometries[0].coordinates[0][0][0],
               }),
-              setZoomDefault(5)
+              setZoomDefault(5),
+              setActiveTitle(title)
             )
           }}
           iconName={iconHandler}
@@ -84,27 +89,41 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
 
   // USGS API DATA
   const earthQuakeTracker = usgsEvents.map(
-    ({ type, fullDate, minDate, coordinates, mag, title, place, id }) => (
+    ({
+      type,
+      updated,
+      fullDate,
+      minDate,
+      coordinates,
+      mag,
+      title,
+      place,
+      id,
+    }) => (
       <LocationPointer
         type={type}
         key={id}
         idEvent={id}
+        idHolder={title === activeTitle && "activeEventLocationPointer"}
         lat={coordinates[1]}
         lng={coordinates[0]}
         iconName2={earthquakeIcon}
         mag={mag}
+        updated={updated}
         onClickEvent={() => {
           return (
-            setLocationInfo({
+            (setLocationInfo({
               type: type,
-              date: fullDate,
-              mag: mag,
+              date: minDate + fullDate,
+              mag,
               title,
             }),
             setCenterDefault({
               lat: coordinates[1],
               lng: coordinates[0],
-            })
+            })),
+            setZoomDefault(5),
+            setActiveTitle(title)
           )
         }}
       />
@@ -117,6 +136,7 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
         onClickPointer={val => setCenterDefault(val)}
         onClickPointerZoom={val => setZoomDefault(val)}
         onClickEvent={val => setLocationInfo(val)}
+        onClickActiveEvent={val => setActiveTitle(val)}
         nasaEventsInfo={nasaEvents}
         usgsEvents={usgsEvents}
         icons={iconHandler}

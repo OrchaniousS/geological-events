@@ -64,12 +64,12 @@ ID 19 - Manmade
   return (
     <>
       {type ? (
-        <>
+        <div>
           <div className="earthquakeIconHolder">
             {mag}
             <Icon className={iconClass} icon={icon} />
           </div>
-        </>
+        </div>
       ) : (
         <>
           <Icon className={iconClass} icon={icon} />

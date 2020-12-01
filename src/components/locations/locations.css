@@ -54,6 +54,9 @@ h2 span {
 
 .locationDiv {
   font-size: 1rem;
+  text-align: left;
+  padding: 0.1rem;
+  line-height: 1.4rem;
 }
 
 .eventLocationDiv {

@@ -40,6 +40,7 @@ export const loadUSGSApi = async () => {
 
       return earthQuakes.features.map(({ geometry, properties, id }) => ({
         type: properties.type,
+        updated: properties.updated,
         fullDate: new Date(properties.updated).toUTCString("en-GB"),
         minDate: new Date(properties.updated).toLocaleDateString("en-GB"),
         coordinates: geometry.coordinates,
