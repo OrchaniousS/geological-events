@@ -3,8 +3,9 @@
   /* display: flex; */
 }
 
-#___loader {
-  opacity: 75%;
+#___loader,
+#___loaderSecondery {
+  /* opacity: 75%; */
   background: #141e30; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -16,22 +17,43 @@
     #243b55,
     #141e30
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  display: fixed;
-  position: absolute;
-  left: -50%;
-  top: -50%;
-  right: 50%;
-  bottom: 50%;
   z-index: 100;
   transition: all 1s ease-out;
   text-align: center;
-  display: block;
-  width: auto;
-  height: auto;
-  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#___loader {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  position: absolute;
+  /* opacity: 97%; */
+}
+
+@media (min-width: 650px) {
+  #___loaderSecondery {
+    left: -50%;
+    top: -50%;
+    right: 50%;
+    bottom: 50%;
+    display: flex;
+    position: fixed;
+  }
+}
+
+@media (max-width: 650px) {
+  #___loaderSecondery {
+    left: -50%;
+    top: -50%;
+    right: 50%;
+    bottom: 50%;
+    display: flex;
+    position: fixed;
+  }
 }
 
 .loaderContainer {

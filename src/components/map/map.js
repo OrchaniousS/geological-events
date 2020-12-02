@@ -24,11 +24,18 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
   const [centerDefault, setCenterDefault] = useState(null)
   const [zoomDefault, setZoomDefault] = useState(null)
   const [activeTitle, setActiveTitle] = useState("")
+  const [activePointers, setActivePointer] = useState(false)
 
   center = { lat: 32.8823157, lng: 34.7500211 }
   zoom = 1
 
-  useEffect(() => {}, [center, zoom])
+  useEffect(() => {
+    if (nasaEvents.length > 1) {
+      setTimeout(() => {
+        setActivePointer(true)
+      }, 5000)
+    }
+  }, [nasaEvents.length, center, zoom])
 
   const iconHandler = {
     drought: droughtIcon,
@@ -133,30 +140,31 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
 
   return (
     <>
-      {/* Loader has been moved to here for better UI UX */}
-      {nasaEvents.length > 1 && (
-        <SideInfo
-          onClickPointer={val => setCenterDefault(val)}
-          onClickPointerZoom={val => setZoomDefault(val)}
-          onClickEvent={val => setLocationInfo(val)}
-          onClickActiveEvent={val => setActiveTitle(val)}
-          nasaEventsInfo={nasaEvents}
-          usgsEvents={usgsEvents}
-          icons={iconHandler}
-          icons2={earthquakeIcon}
-        />
+      <SideInfo
+        onClickPointer={val => setCenterDefault(val)}
+        onClickPointerZoom={val => setZoomDefault(val)}
+        onClickEvent={val => setLocationInfo(val)}
+        onClickActiveEvent={val => setActiveTitle(val)}
+        nasaEventsInfo={nasaEvents}
+        usgsEvents={usgsEvents}
+        icons={iconHandler}
+        icons2={earthquakeIcon}
+      />
+      {nasaEvents.length > 1 ? (
+        <div className="mapContainer">
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_KEY }}
+            center={!centerDefault ? center : centerDefault}
+            zoom={!centerDefault ? zoom : zoomDefault}
+          >
+            {activePointers ? trackerPointer : <Loader type="loaderSec" />}
+            {earthQuakeTracker}
+          </GoogleMapReact>
+          {locationInfo && <LocationInfo locationInfo={locationInfo} />}
+        </div>
+      ) : (
+        <Loader />
       )}
-      <div className="mapContainer">
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_KEY }}
-          center={!centerDefault ? center : centerDefault}
-          zoom={!centerDefault ? zoom : zoomDefault}
-        >
-          {nasaEvents.length > 1 ? trackerPointer : <Loader />}
-          {usgsEvents.length > 1 ? earthQuakeTracker : <Loader />}
-        </GoogleMapReact>
-        {locationInfo && <LocationInfo locationInfo={locationInfo} />}
-      </div>
     </>
   )
 }

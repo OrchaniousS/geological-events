@@ -39,5 +39,4 @@ _Mobile View_
 - Google Map React
 - Redux ( React and Gatsby)
 - Iconify by React
-- nprogress (cool UI progress loader)
 - Firebase (Deployment)
