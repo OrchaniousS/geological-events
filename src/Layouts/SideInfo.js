@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
+import filterIcon from "@iconify/icons-codicon/filter"
 
 import IconHandler from "./iconHandler"
-
 import "../style/sideInfo.css"
 
 const SideInfo = ({
@@ -22,6 +22,22 @@ const SideInfo = ({
   const [usgsData, setUsgsData] = useState(false)
   const [activeThumb, setActiveThumb] = useState("activeThumb")
   const [activeTitle, setActiveTitle] = useState("")
+  const [filterDisplay, setFilterDisplay] = useState(false)
+
+  const [filterInfoWidth, setFilterInfoWidth] = useState()
+  const [filterInfoHeight, setFilterInfoHeight] = useState()
+  const [windowInnerWidth, setWindowInnerWidth] = useState()
+
+  useEffect(() => {
+    setDateFilterState(true)
+    if (window.innerWidth > 1000) {
+      filterDisplay ? setFilterInfoWidth("20%") : setFilterInfoWidth("0%")
+    }
+    if (window.innerWidth < 1000) {
+      filterDisplay ? setFilterInfoHeight("100%") : setFilterInfoHeight("0%")
+      setWindowInnerWidth(true)
+    }
+  }, [filterDisplay])
 
   // Which event tab to present
   const nasaUsgsDataHandler = val => {
@@ -160,139 +176,151 @@ const SideInfo = ({
   // NASA MAP - NATURAL EVENTS
   const mapEvents =
     iconFilter === null
-      ? nasaEventsInfo.map(({ categories, geometries, date, link, title }) => (
-          <div
-            key={link}
-            id={title === activeTitle ? "activeEventLocation" : ""}
-            role="button"
-            tabIndex="0"
-            className="events"
-            onClick={() => {
-              return (
-                onClickEvent({
-                  id: categories[0].id,
-                  date: date,
-                  title,
-                  link,
-                }),
-                onClickPointer({
-                  lat:
-                    geometries[0].coordinates.length === 2
-                      ? geometries[0].coordinates[1]
-                      : geometries[0].coordinates[0][0][1],
-                  lng:
-                    geometries[0].coordinates.length === 2
-                      ? geometries[0].coordinates[0]
-                      : geometries[0].coordinates[0][0][0],
-                }),
-                onClickPointerZoom(5),
-                onClickActiveEvent(title),
-                setActiveTitle(title)
+      ? nasaEventsInfo
+          .map(({ categories, geometries, date, link, title }) => (
+            <div
+              key={link}
+              id={title === activeTitle ? "activeEventLocation" : ""}
+              role="button"
+              tabIndex="0"
+              className="events"
+              onClick={() => {
+                return (
+                  onClickEvent({
+                    id: categories[0].id,
+                    date: date,
+                    title,
+                    link,
+                  }),
+                  onClickPointer({
+                    lat:
+                      geometries[0].coordinates.length === 2
+                        ? geometries[0].coordinates[1]
+                        : geometries[0].coordinates[0][0][1],
+                    lng:
+                      geometries[0].coordinates.length === 2
+                        ? geometries[0].coordinates[0]
+                        : geometries[0].coordinates[0][0][0],
+                  }),
+                  onClickPointerZoom(5),
+                  onClickActiveEvent(title),
+                  setActiveTitle(title),
+                  windowInnerWidth &&
+                    setFilterDisplay(filterDisplay => !filterDisplay)
+                )
+              }}
+              onKeyDown={() => {
+                return (
+                  onClickEvent({
+                    id: categories[0].id,
+                    date: date,
+                    title,
+                    link,
+                  }),
+                  onClickPointer({
+                    lat:
+                      geometries[0].coordinates.length === 2
+                        ? geometries[0].coordinates[1]
+                        : geometries[0].coordinates[0][0][1],
+                    lng:
+                      geometries[0].coordinates.length === 2
+                        ? geometries[0].coordinates[0]
+                        : geometries[0].coordinates[0][0][0],
+                  }),
+                  onClickPointerZoom(5),
+                  onClickActiveEvent(title),
+                  setActiveTitle(title),
+                  windowInnerWidth &&
+                    setFilterDisplay(filterDisplay => !filterDisplay)
+                )
+              }}
+            >
+              <>
+                <div className="eventLogo">
+                  <IconHandler idEvent={categories[0].id} iconName={icons} />
+                </div>
+                <div className="eventInfo">
+                  <h5>{title}</h5>
+                  <span>{date}</span>
+                </div>
+              </>
+            </div>
+          ))
+          .reverse()
+      : nasaEventsInfo
+          .map(
+            ({ categories, geometries, date, link, title }) =>
+              categories[0].id === iconFilter && (
+                <div
+                  key={link}
+                  id={title === activeTitle ? "activeEventLocation" : ""}
+                  role="button"
+                  tabIndex="0"
+                  className="events"
+                  onClick={() => {
+                    return (
+                      onClickEvent({
+                        id: categories[0].id,
+                        date: date,
+                        title,
+                        link,
+                      }),
+                      onClickPointer({
+                        lat:
+                          geometries[0].coordinates.length === 2
+                            ? geometries[0].coordinates[1]
+                            : geometries[0].coordinates[0][0][1],
+                        lng:
+                          geometries[0].coordinates.length === 2
+                            ? geometries[0].coordinates[0]
+                            : geometries[0].coordinates[0][0][0],
+                      }),
+                      onClickPointerZoom(5),
+                      onClickActiveEvent(title),
+                      setActiveTitle(title),
+                      windowInnerWidth &&
+                        setFilterDisplay(filterDisplay => !filterDisplay)
+                    )
+                  }}
+                  onKeyDown={() => {
+                    return (
+                      onClickEvent({
+                        id: categories[0].id,
+                        date: date,
+                        title,
+                        link,
+                      }),
+                      onClickPointer({
+                        lat:
+                          geometries[0].coordinates.length === 2
+                            ? geometries[0].coordinates[1]
+                            : geometries[0].coordinates[0][0][1],
+                        lng:
+                          geometries[0].coordinates.length === 2
+                            ? geometries[0].coordinates[0]
+                            : geometries[0].coordinates[0][0][0],
+                      }),
+                      onClickPointerZoom(5),
+                      onClickActiveEvent(title),
+                      setActiveTitle(title),
+                      windowInnerWidth &&
+                        setFilterDisplay(filterDisplay => !filterDisplay)
+                    )
+                  }}
+                >
+                  <>
+                    <div className="eventLogo">
+                      <IconHandler idEvent={iconFilter} iconName={icons} />
+                    </div>
+                    <div className="eventInfo">
+                      <h5>{title}</h5>
+                      <span>{date}</span>
+                    </div>
+                  </>
+                </div>
               )
-            }}
-            onKeyDown={() => {
-              return (
-                onClickEvent({
-                  id: categories[0].id,
-                  date: date,
-                  title,
-                  link,
-                }),
-                onClickPointer({
-                  lat:
-                    geometries[0].coordinates.length === 2
-                      ? geometries[0].coordinates[1]
-                      : geometries[0].coordinates[0][0][1],
-                  lng:
-                    geometries[0].coordinates.length === 2
-                      ? geometries[0].coordinates[0]
-                      : geometries[0].coordinates[0][0][0],
-                }),
-                onClickPointerZoom(5),
-                onClickActiveEvent(title),
-                setActiveTitle(title)
-              )
-            }}
-          >
-            <>
-              <div className="eventLogo">
-                <IconHandler idEvent={categories[0].id} iconName={icons} />
-              </div>
-              <div className="eventInfo">
-                <h5>{title}</h5>
-                <span>{date}</span>
-              </div>
-            </>
-          </div>
-        ))
-      : nasaEventsInfo.map(
-          ({ categories, geometries, date, link, title }) =>
-            categories[0].id === iconFilter && (
-              <div
-                key={link}
-                id={title === activeTitle && "activeEventLocation"}
-                role="button"
-                tabIndex="0"
-                className="events"
-                onClick={() => {
-                  return (
-                    onClickEvent({
-                      id: categories[0].id,
-                      date: date,
-                      title,
-                      link,
-                    }),
-                    onClickPointer({
-                      lat:
-                        geometries[0].coordinates.length === 2
-                          ? geometries[0].coordinates[1]
-                          : geometries[0].coordinates[0][0][1],
-                      lng:
-                        geometries[0].coordinates.length === 2
-                          ? geometries[0].coordinates[0]
-                          : geometries[0].coordinates[0][0][0],
-                    }),
-                    onClickPointerZoom(5),
-                    onClickActiveEvent(title),
-                    setActiveTitle(title)
-                  )
-                }}
-                onKeyDown={() => {
-                  return (
-                    onClickEvent({
-                      id: categories[0].id,
-                      date: date,
-                      title,
-                      link,
-                    }),
-                    onClickPointer({
-                      lat:
-                        geometries[0].coordinates.length === 2
-                          ? geometries[0].coordinates[1]
-                          : geometries[0].coordinates[0][0][1],
-                      lng:
-                        geometries[0].coordinates.length === 2
-                          ? geometries[0].coordinates[0]
-                          : geometries[0].coordinates[0][0][0],
-                    }),
-                    onClickPointerZoom(5),
-                    onClickActiveEvent(title),
-                    setActiveTitle(title)
-                  )
-                }}
-              >
-                <>
-                  <div className="eventLogo">
-                    <IconHandler idEvent={iconFilter} iconName={icons} />
-                  </div>
-                  <div className="eventInfo">
-                    <h5>{title}</h5>
-                    <span>{date}</span>
-                  </div>
-                </>
-              </div>
-            )
-        )
+          )
+          .reverse()
 
   // USGS MAP - EARTH QUAKES
   const usgsMapEvents = usgsEvents.map(
@@ -329,7 +357,9 @@ const SideInfo = ({
             }),
             onClickPointerZoom(5),
             onClickActiveEvent(title),
-            setActiveTitle(title)
+            setActiveTitle(title),
+            windowInnerWidth &&
+              setFilterDisplay(filterDisplay => !filterDisplay)
           )
         }}
         onKeyDown={() => {
@@ -346,7 +376,9 @@ const SideInfo = ({
             }),
             onClickPointerZoom(5),
             onClickActiveEvent(title),
-            setActiveTitle(title)
+            setActiveTitle(title),
+            windowInnerWidth &&
+              setFilterDisplay(filterDisplay => !filterDisplay)
           )
         }}
       >
@@ -376,7 +408,30 @@ const SideInfo = ({
 
   return (
     <>
-      <div className="mainContainer">
+      <div
+        className="mobileContainer"
+        onClick={() => {
+          setFilterDisplay(filterDisplay => !filterDisplay)
+        }}
+        onKeyDown={() => {
+          setFilterDisplay(filterDisplay => !filterDisplay)
+        }}
+        role="button"
+        tabIndex="0"
+      >
+        {filterDisplay ? (
+          <>X</>
+        ) : (
+          <>
+            <Icon icon={filterIcon} />
+            <div>Filter</div>
+          </>
+        )}
+      </div>
+      <div
+        className="mainContainer"
+        style={{ width: filterInfoWidth, height: filterInfoHeight }}
+      >
         <div className="eventsTypeHandler">
           <div
             className={nasaData ? activeThumb : ""}
@@ -407,7 +462,7 @@ const SideInfo = ({
                   <div>{dateFilterHandler}</div>
                 </div>
                 <div className="eventsContainer">
-                  {dateFilterState ? mapEvents : mapEvents.reverse()}
+                  {dateFilterState ? mapEvents.reverse() : mapEvents}
                 </div>
               </>
             )}
@@ -422,19 +477,19 @@ const SideInfo = ({
                   <div>{filterByMagnitude}</div>
                 </div>
                 <div className="eventsContainer">
-                  {dateFilterState == 1 &&
+                  {dateFilterState &&
                     usgsMapEvents
                       .sort((a, b) => a.props.updated - b.props.updated)
                       .reverse()}
-                  {dateFilterState == 0 &&
+                  {!dateFilterState &&
                     usgsMapEvents.sort(
                       (a, b) => a.props.updated - b.props.updated
                     )}
-                  {magFilterState == 1 &&
+                  {magFilterState &&
                     usgsMapEvents
                       .sort((a, b) => a.props.mag - b.props.mag)
                       .reverse()}
-                  {magFilterState == 0 &&
+                  {!magFilterState &&
                     usgsMapEvents.sort((a, b) => a.props.mag - b.props.mag)}
                   {dateFilterState === null && magFilterState === null
                     ? usgsMapEvents

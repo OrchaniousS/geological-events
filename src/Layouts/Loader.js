@@ -1,6 +1,8 @@
 import React from "react"
 import LoaderSVG from "../images/loader.svg"
 
+// styles in index.css
+
 const Loader = ({ type }) => {
   const typeHandler = () => {
     if (type === "loaderSec") {

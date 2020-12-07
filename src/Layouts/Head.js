@@ -5,11 +5,15 @@ export default function Head() {
   return (
     <>
       <Helmet>
+        <meta
+          name="google-site-verification"
+          content="8NShXGj8IYgzXtaIEjriiU14uWCdfWajpeFdNzVZz1s"
+        />
         <title>Natural Events | NASA | USGS |</title>
         <html lang="en" />
         <meta
-          name="description"
-          content=" Natural and Geological Events around the globe website. Made with NASA API, Google Map API Gatsby,React, PWA(Fully offline support)."
+          name="google-site-verification"
+          content="8NShXGj8IYgzXtaIEjriiU14uWCdfWajpeFdNzVZz1s"
         />
       </Helmet>
     </>

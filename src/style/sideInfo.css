@@ -1,10 +1,6 @@
 .mainContainer {
-  width: 18%;
   overflow-x: auto;
   position: fixed;
-  top: 64px;
-  left: 0;
-  bottom: 0;
   z-index: 52;
   background: #4568dc; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -17,6 +13,8 @@
     #b06ab3,
     #4568dc
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 0 0.3rem black;
 }
 
 .fadeInDiv {
@@ -148,13 +146,71 @@
   margin: 0.3rem;
 }
 
+.mobileContainer:active {
+  background: white;
+  color: dodgerblue;
+}
+
+.mobileContainer {
+  cursor: pointer;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  border-radius: 2rem;
+  color: white;
+  background: dodgerblue;
+  padding: 0.6rem 0.9rem;
+  margin: auto;
+  text-shadow: 0 0 0.3rem black;
+  filter: drop-shadow(0 0 0.2rem black);
+  transition: all 0.2s ease-in;
+  outline: 0;
+}
+
+.slideIn {
+  animation: slideRight 0.2s ease-in;
+}
+
+@keyframes slideRight {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(20%);
+  }
+}
+
 @media (max-width: 1000px) {
   .mainContainer {
-    display: none;
+    top: 5%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .mobileContainer {
+    left: 3%;
+    bottom: 4%;
   }
 }
 
 @media (min-width: 1000px) {
+  .mainContainer {
+    top: 64px;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+  }
+
+  .mobileContainer {
+    left: 5%;
+    /* top: 1%; */
+  }
+
   .sideContainer {
     display: flex;
     flex-direction: column;
