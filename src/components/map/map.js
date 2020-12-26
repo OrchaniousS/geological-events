@@ -24,7 +24,7 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
   const [centerDefault, setCenterDefault] = useState(null)
   const [zoomDefault, setZoomDefault] = useState(null)
   const [activeTitle, setActiveTitle] = useState("")
-  const [activePointers, setActivePointer] = useState(false)
+  const [activePointers, setActivePointers] = useState(false)
 
   center = { lat: 32.8823157, lng: 34.7500211 }
   zoom = 1
@@ -32,8 +32,8 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
   useEffect(() => {
     if (nasaEvents.length > 1) {
       setTimeout(() => {
-        setActivePointer(true)
-      }, 5000)
+        setActivePointers(true)
+      }, 3000)
     }
   }, [nasaEvents.length, center, zoom])
 
@@ -157,7 +157,13 @@ const ReactGoogleMap = ({ nasaEvents, usgsEvents, center, zoom }) => {
             center={!centerDefault ? center : centerDefault}
             zoom={!centerDefault ? zoom : zoomDefault}
           >
-            {activePointers ? trackerPointer : <Loader type="loaderSec" />}
+            {activePointers ? (
+              trackerPointer
+            ) : (
+              <>
+                <Loader type="loaderSec" />
+              </>
+            )}
             {earthQuakeTracker}
           </GoogleMapReact>
           {locationInfo && <LocationInfo locationInfo={locationInfo} />}
