@@ -1,21 +1,20 @@
 #___gatsby {
   font-family: "Alef", sans-serif;
-  /* display: flex; */
 }
 
 #___loader,
 #___loaderSecondery {
-  background: #141e30; /* fallback for old browsers */
+  background: #141e30;
   background: -webkit-linear-gradient(
     to right,
     #243b55,
     #141e30
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to right,
     #243b55,
     #141e30
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );
   z-index: 100;
   transition: all 1s ease-out;
   text-align: center;

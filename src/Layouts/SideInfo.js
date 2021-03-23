@@ -108,6 +108,12 @@ const SideInfo = ({
     </div>
   )
 
+  const capitalize = (str) => {
+    str = str.split('Icon')[0];
+    str = str.charAt(0).toUpperCase() + str.slice(1);
+    return str
+  }
+
   // Icon Filter
   const filterByIcon = (
     <div className="iconSelectContainer">
@@ -118,9 +124,12 @@ const SideInfo = ({
           availableIDS.map(
             item =>
               id === item && (
+                <>
                 <button key={id} onClick={() => setIconFilter(id)}>
-                  <Icon className={className} icon={iconHolder} />
+                <span>{capitalize(className)}</span>
+                <Icon className={className} icon={iconHolder} />
                 </button>
+                </>
               )
           )
         )}

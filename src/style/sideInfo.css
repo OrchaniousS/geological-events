@@ -2,17 +2,7 @@
   overflow-x: auto;
   position: fixed;
   z-index: 52;
-  background: #4568dc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #4568dc;
   transition: all 0.7s ease-in-out;
   box-shadow: 0 0 0.3rem black;
 }
@@ -61,7 +51,7 @@
 
 .activeThumb {
   outline: 0;
-  background: rgba(255, 255, 255, 0.349);
+  background: rgba(226, 166, 166, 0.349);
   transition: all 0.4s ease-in;
 }
 
@@ -79,18 +69,8 @@
 
 .sideContainer,
 .eventsTypeHandler {
-  background: #4568dc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: rgb(200, 195, 188);
+  background: dodgerblue;
+  color: rgb(231, 228, 224);
   text-shadow: 0 0 0.4rem black;
   font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
   transition: all 1s ease-in;
@@ -220,24 +200,39 @@
 }
 
 /* Filter */
-
 .dateFilter {
   display: flex;
   flex-direction: column;
-  /* width: 80%; */
   text-align-last: center;
   margin: 0.6rem;
   text-align-last: left;
 }
 
 .dateHeader {
-  /* padding: 0.2rem; */
   margin-right: 1rem;
 }
 
 .dateFilterContainer,
 .iconSelectContainer {
   display: flex;
+}
+
+button > span {
+  display:none;
+  border-radius: 2rem;
+  border: 1px solid rgba(208, 211, 214, 0.5);
+}
+
+button:hover > span{
+  position: fixed;
+  display: flex;
+  z-index: 990;
+  background: rgba(0, 0, 0, 0.637);
+  width:auto;
+  height:auto;
+  padding: 1rem;
+  top:-200%;
+  left:-50%;
 }
 
 .dataSelect {

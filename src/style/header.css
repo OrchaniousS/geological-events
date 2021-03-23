@@ -5,17 +5,7 @@ header {
   right: 0;
   z-index: 99;
   transition: all 0.1s ease-in;
-  background: #4568dc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: dodgerblue;
   box-shadow: 0 0 0.4rem black;
   text-align: center;
   color: white;
@@ -53,13 +43,11 @@ header {
 }
 
 .headerMinimized {
-  /* position: fixed; */
   top: 0;
   left: 0;
   right: 0;
   z-index: 99;
   transition: all 0.4s ease-in;
-  /* height: 2rem; */
 }
 
 @media (min-width: 880px) {

@@ -1,6 +1,9 @@
-const urlEONETNasa = "https://eonet.sci.gsfc.nasa.gov/api/v2.1/events"
+import {dateHandlerToday,dateHandlerNextDay} from './components/dateHandler'
 
+
+// Nasa data
 export const loadNasaApi = async () => {
+const urlEONETNasa = "https://eonet.sci.gsfc.nasa.gov/api/v2.1/events"
   const eventsData = await fetch(urlEONETNasa)
   try {
     const { events } = await eventsData.json()
@@ -17,21 +20,10 @@ export const loadNasaApi = async () => {
   }
 }
 
-const dateHandlerToday = {
-  todayDayOfMonth: new Date().getDate(),
-  todayMonth: new Date().getMonth() + 1,
-  todayYear: new Date().getFullYear(),
-}
 
-const dateHandlerNextDay = {
-  nextDay: new Date(Date.now() + 86400000).getDate(),
-  nextMonth: new Date(Date.now() + 86400000).getMonth() + 1,
-  nextYear: new Date(Date.now() + 86400000).getFullYear(),
-}
-
-const urlUSGS = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${dateHandlerToday.todayYear}-${dateHandlerToday.todayMonth}-${dateHandlerToday.todayDayOfMonth}&endtime=${dateHandlerNextDay.nextYear}-${dateHandlerNextDay.nextMonth}-${dateHandlerNextDay.nextDay}&minmagnitude=2.5`
-
+// USGS data
 export const loadUSGSApi = async () => {
+const urlUSGS = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${dateHandlerToday.todayYear}-${dateHandlerToday.todayMonth}-${dateHandlerToday.todayDayOfMonth}&endtime=${dateHandlerNextDay.nextYear}-${dateHandlerNextDay.nextMonth}-${dateHandlerNextDay.nextDay}&minmagnitude=2.5`
   const earthquakesData = await fetch(urlUSGS)
 
   try {

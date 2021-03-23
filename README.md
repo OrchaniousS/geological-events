@@ -31,6 +31,8 @@ _Mobile View_
 - Add Filter by Icon. - Done!
 - Add Array of events by date. - Done!
 - Add Trackable Events by date and lat/lng cords. - Done!
+- Add Time zone filter.
+- Add Country region events.
 
 ### Packages used
 
